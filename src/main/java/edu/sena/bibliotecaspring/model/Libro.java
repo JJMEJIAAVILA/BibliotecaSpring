@@ -1,9 +1,11 @@
 package edu.sena.bibliotecaspring.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "libros")
+@PrimaryKeyJoinColumn(name = "id")
 public class Libro extends ElementoBiblioteca {
     private String autor;
     private String isbn;

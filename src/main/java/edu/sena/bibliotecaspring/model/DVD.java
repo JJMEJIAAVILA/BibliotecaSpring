@@ -1,18 +1,20 @@
 package edu.sena.bibliotecaspring.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "dvds")
+@PrimaryKeyJoinColumn(name = "id")
 public class DVD extends ElementoBiblioteca {
     private String director;
     private String genero;
-    private int duracion;
+    private String duracion;
 
     public DVD() {
     }
 
-    public DVD(String titulo, LocalDate fechaPublicacion, String director, String genero, int duracion) {
+    public DVD(String titulo, LocalDate fechaPublicacion, String director, String genero, String duracion) {
         super(titulo, fechaPublicacion);
         this.director = director;
         this.genero = genero;
@@ -35,11 +37,11 @@ public class DVD extends ElementoBiblioteca {
         this.genero = genero;
     }
 
-    public int getDuracion() {
+    public String getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
 }

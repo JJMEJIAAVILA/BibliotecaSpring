@@ -1,21 +1,31 @@
 package edu.sena.bibliotecaspring.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "revistas")
+@PrimaryKeyJoinColumn(name = "id")
 public class Revista extends ElementoBiblioteca {
-    private String categoria;
-    private int numero;
     private String editorial;
+    private String categoria;
+    private String issn;
 
     public Revista() {
     }
 
-    public Revista(String titulo, LocalDate fechaPublicacion, String categoria, int numero, String editorial) {
+    public Revista(String titulo, LocalDate fechaPublicacion, String editorial, String categoria, String issn) {
         super(titulo, fechaPublicacion);
+        this.editorial = editorial;
         this.categoria = categoria;
-        this.numero = numero;
+        this.issn = issn;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(String editorial) {
         this.editorial = editorial;
     }
 
@@ -27,19 +37,11 @@ public class Revista extends ElementoBiblioteca {
         this.categoria = categoria;
     }
 
-    public int getNumero() {
-        return numero;
+    public String getIssn() {
+        return issn;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
+    public void setIssn(String issn) {
+        this.issn = issn;
     }
 }
