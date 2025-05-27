@@ -1,93 +1,119 @@
-# Sistema de Gestión de Biblioteca con Spring Boot
 
-## Descripción del Proyecto
+# 📚 BibliotecaSpring - API REST para Gestión de Libros
 
-El **Sistema de Gestión de Biblioteca** es una aplicación web desarrollada con **Spring Boot** que permite administrar el catálogo de una biblioteca. El sistema facilita la gestión de diferentes tipos de elementos bibliográficos: **libros**, **revistas** y **DVDs**. Con esta aplicación, los bibliotecarios pueden realizar operaciones básicas como agregar, editar, eliminar y buscar elementos en el catálogo.
+Este repositorio es un **clon adaptado y extendido** del proyecto original desarrollado por el instructor **Julián Loaiza** y el aprendiz **José**, como parte de un proceso formativo en el SENA.  
+> ⚠️ **Este proyecto se ha replicado con fines educativos y de aprendizaje, respetando los derechos de autor de sus creadores originales.**  
+> Repositorio original: [julian-loaiza/BibliotecaSpring](https://github.com/julian-loaiza/BibliotecaSpring)
 
-## Tecnologías Utilizadas
+---
 
-* **Java**: Lenguaje de programación principal
-* **Spring Boot**: Framework para el desarrollo de aplicaciones Java
-* **Spring Data JPA**: Para la persistencia de datos
-* **Thymeleaf**: Motor de plantillas para las vistas
-* **MySQL**: Sistema gestor de base de datos
-* **Bootstrap**: Framework CSS para el diseño responsive
+## 🔍 Descripción del Proyecto
 
-## Estructura del Proyecto
+`BibliotecaSpring` es una API REST creada con **Java**, **Spring Boot** y **JPA**, que permite realizar operaciones CRUD (crear, leer, actualizar y eliminar) sobre una base de datos de libros.
 
-El proyecto sigue una arquitectura **MVC** (Modelo-Vista-Controlador):
+Esta API es ideal como ejemplo práctico de arquitectura de software backend con buenas prácticas y estructura limpia.
 
-### 1. Capa de Modelo
+---
 
-Contiene las entidades JPA que representan los objetos del dominio:
+## 🏗️ Tecnologías Usadas
 
-* `ElementoBiblioteca`: Clase base abstracta para todos los elementos del catálogo
-* `Libro`, `Revista`, `DVD`: Clases específicas para cada tipo de elemento
+- ☕ Java 17
+- 🌱 Spring Boot 3
+- 🗃️ Spring Data JPA
+- 🐘 PostgreSQL / H2 (en pruebas)
+- 🌐 RESTful API
+- 🧪 Insomnia / Postman (para pruebas)
 
-### 2. Capa de Repositorio
+---
 
-Interfaces que extienden de JpaRepository para el acceso a datos:
+## 🚀 Cómo Clonar y Ejecutar el Proyecto en IntelliJ IDEA
 
-* `LibroRepository`, `RevistaRepository`, `DVDRepository`
+### 1. Clonar el repositorio original
 
-### 3. Capa de Servicio
-
-Clases que implementan la lógica de negocio:
-
-* `LibroService`, `RevistaService`, `DVDService`
-
-### 4. Capa de Controlador
-
-Controladores que manejan las peticiones HTTP:
-
-* `MainController`: Controlador para la página principal
-* `LibroController`, `RevistaController`, `DVDController`: Controladores específicos
-
-### 5. Capa de Vista
-
-Plantillas Thymeleaf para la interfaz de usuario:
-
-* `index.html`: Página principal
-* Carpetas `libros`, `revistas`, `dvds` con sus respectivas vistas
-
-## Configuración de la Base de Datos
-
-### Paso 1: Crear la Base de Datos
-
-Ejecuta el script SQL proporcionado en el archivo `biblioteca.sql` para crear la estructura de la base de datos y datos de prueba:
-
-1. Abre tu gestor de MySQL (MySQL Workbench, HeidiSQL, phpMyAdmin, etc.)
-2. Ejecuta el script SQL proporcionado
-
-### Paso 2: Configurar la Conexión
-
-Edita el archivo `src/main/resources/application.properties` con tus credenciales de MySQL:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/biblioteca?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
-spring.datasource.username=tu_usuario
-spring.datasource.password=tu_contraseña
+```bash
+git clone https://github.com/JJMEJIAAVILA/BibliotecaSpring.git
+cd BibliotecaSpring
 ```
 
-## Ejecución de la Aplicación
+### 2. Importar en IntelliJ IDEA
 
-Para ejecutar la aplicación:
+1. Abre IntelliJ IDEA.
+2. Haz clic en `File > Open`, selecciona la carpeta del proyecto y haz clic en `OK`.
+3. Espera a que se descarguen las dependencias automáticamente (Maven o Gradle).
 
-1. Asegúrate de tener instalado JDK 17 o superior
-2. Configura la conexión a la base de datos en `application.properties`
-3. Ejecuta la clase `BibliotecaSpringApplication.java`
-4. Abre un navegador y accede a `http://localhost:8080`
+### 3. Configurar base de datos (H2 por defecto o PostgreSQL)
 
-## Funcionalidades Principales
+Revisa el archivo:  
+`src/main/resources/application.properties`  
+y ajusta si usas PostgreSQL:
 
-* **Gestión de Libros**: Agregar, editar, eliminar y buscar libros por título o autor
-* **Gestión de Revistas**: Agregar, editar, eliminar y buscar revistas por categoría o editorial
-* **Gestión de DVDs**: Agregar, editar, eliminar y buscar DVDs por género o director
-* **Interfaz Responsive**: Diseño adaptable a diferentes dispositivos
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/biblioteca
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
+spring.jpa.hibernate.ddl-auto=update
+```
 
-## Requisitos del Sistema
+Para pruebas rápidas, puedes dejar configurado H2 (memoria).
 
-* Java JDK 17 o superior
-* MySQL 8.0 o superior
-* Maven 3.6 o superior
-* Navegador web moderno
+---
+
+## 🧪 Pruebas con Insomnia
+
+Puedes probar el endpoint principal:
+
+```
+GET http://localhost:8080/api/libros
+```
+
+Esto retornará una lista de libros con el siguiente formato:
+
+```json
+[
+  {
+    "id": 1,
+    "titulo": "Cien años de soledad",
+    "fechaPublicacion": "1967-05-30",
+    "autor": "Gabriel García Márquez",
+    "isbn": "978-0307267149",
+    "numeroPaginas": 0
+  }
+]
+```
+
+También puedes realizar:
+
+- **POST**: Crear un libro
+- **PUT**: Editar un libro
+- **DELETE**: Eliminar por ID
+
+---
+
+## ✍️ Mejoras Realizadas (hasta la fecha)
+
+- ✅ Pruebas funcionales en Insomnia
+- ✅ Documentación actualizada
+- 🔄 Pendiente: Validaciones con DTOs, control de errores, manejo de excepciones globales, Swagger/OpenAPI
+
+---
+
+## 💡 Próximas Mejoras Propuestas
+
+- Agregar autenticación con Spring Security
+- Validaciones con anotaciones `@Valid`
+- Documentación interactiva con Swagger
+- Frontend básico con HTML + JS o Angular
+
+---
+
+## 🧑‍💻 Autor del Fork
+
+Este fork ha sido creado por **Jhon Jairo Mejía Ávila**, aprendiz del programa **Análisis y Desarrollo de Software del SENA**.
+
+📫 Contacto: [jhon_jmejia@soy.sena.edu.co](mailto:jhon_jmejia@soy.sena.edu.co)
+
+---
+
+## ⚖️ Licencia
+
+Este repositorio adaptado mantiene los créditos del proyecto original. Si los autores del repositorio original establecen una licencia específica, esta será respetada en su totalidad.
