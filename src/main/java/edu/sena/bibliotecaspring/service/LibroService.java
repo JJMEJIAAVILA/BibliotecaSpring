@@ -1,11 +1,12 @@
 package edu.sena.bibliotecaspring.service;
 
 import edu.sena.bibliotecaspring.model.Libro;
-import edu.sena.bibliotecaspring.repository.LibroRepository;
+import edu.sena.bibliotecaspring.repository.LibroRepository; // Asegúrate de tener este import
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional; // <--- Importante: Necesitas Optional
 
 @Service
 public class LibroService {
@@ -17,9 +18,8 @@ public class LibroService {
         return libroRepository.findAll();
     }
 
-    public Libro findById(Long id) {
-        return libroRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Libro no encontrado con id: " + id));
+    public Optional<Libro> findById(Long id) { // <--- Asegúrate de que devuelva Optional
+        return libroRepository.findById(id); // <--- Esto ya devuelve Optional por defecto en JpaRepository
     }
 
     public Libro save(Libro libro) {
@@ -31,10 +31,10 @@ public class LibroService {
     }
 
     public List<Libro> findByTitulo(String titulo) {
-        return libroRepository.findByTituloContaining(titulo);
+        return libroRepository.findByTitulo(titulo);
     }
 
     public List<Libro> findByAutor(String autor) {
-        return libroRepository.findByAutorContaining(autor);
+        return libroRepository.findByAutor(autor);
     }
 }

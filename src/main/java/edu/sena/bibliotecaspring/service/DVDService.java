@@ -1,11 +1,12 @@
 package edu.sena.bibliotecaspring.service;
 
-import edu.sena.bibliotecaspring.model.DVD;
-import edu.sena.bibliotecaspring.repository.DVDRepository;
+import edu.sena.bibliotecaspring.model.DVD; // Asegúrate de que tu modelo DVD esté aquí
+import edu.sena.bibliotecaspring.repository.DVDRepository; // Asegúrate de tener este import
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional; // Importante: Asegúrate de tener este import para Optional
 
 @Service
 public class DVDService {
@@ -17,9 +18,8 @@ public class DVDService {
         return dvdRepository.findAll();
     }
 
-    public DVD findById(Long id) {
-        return dvdRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("DVD no encontrado con id: " + id));
+    public Optional<DVD> findById(Long id) { // Este método devuelve Optional<DVD>
+        return dvdRepository.findById(id);
     }
 
     public DVD save(DVD dvd) {
@@ -30,11 +30,17 @@ public class DVDService {
         dvdRepository.deleteById(id);
     }
 
-    public List<DVD> findByGenero(String genero) {
-        return dvdRepository.findByGeneroContaining(genero);
+    // Métodos de búsqueda personalizados:
+    // Estos llaman a los métodos declarados en DVDRepository
+    public List<DVD> findByTitulo(String titulo) {
+        return dvdRepository.findByTitulo(titulo);
     }
 
-    public List<DVD> findByDirector(String director) {
-        return dvdRepository.findByDirectorContaining(director);
+    public List<DVD> findByGenero(String genero) { // Método para buscar por género
+        return dvdRepository.findByGenero(genero);
+    }
+
+    public List<DVD> findByDirector(String director) { // Método para buscar por director
+        return dvdRepository.findByDirector(director);
     }
 }
