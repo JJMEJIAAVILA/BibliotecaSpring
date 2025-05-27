@@ -1,7 +1,7 @@
 
 # 📚 BibliotecaSpring - API REST para Gestión de Libros
 
-Este repositorio es un **clon adaptado y extendido** del proyecto original desarrollado por el instructor **Julián Loaiza** y el aprendiz **José**, como parte de un proceso formativo en el SENA.  
+Este repositorio es un **clon adaptado y extendido** del proyecto original desarrollado por el instructor **Julián Loaiza** y el aprendiz **José Zuñiga**, como parte de un proceso formativo en el SENA.  
 > ⚠️ **Este proyecto se ha replicado con fines educativos y de aprendizaje, respetando los derechos de autor de sus creadores originales.**  
 > Repositorio original: [julian-loaiza/BibliotecaSpring](https://github.com/julian-loaiza/BibliotecaSpring)
 
